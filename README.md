@@ -101,6 +101,8 @@ Storage: an **ixVolume** (the dataset TrueNAS creates by itself) mounted at
 mounted at `/library`. Install. To update, the app's Update button. Deleting
 the app with "Remove ixVolumes" ticked deletes its settings; the recordings
 stay.
+Every field, step by step:
+[Zaply-Recorder-TrueNAS.pdf](https://goodfolks-app.github.io/zaply-recorder/Zaply-Recorder-TrueNAS.pdf).
 
 ## Set it up
 
