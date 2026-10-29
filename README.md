@@ -92,10 +92,15 @@ services:
     restart: unless-stopped
 ```
 
-**TrueNAS SCALE:** Apps ▸ Discover Apps ▸ Custom App. Image repository
+**TrueNAS SCALE** (24.10 or later): make a dataset for the recordings
+(Datasets ▸ Add Dataset; the SMB preset if your computers reach it through a
+share). Then Apps ▸ Discover Apps ▸ Custom App: image repository
 `ghcr.io/goodfolks-app/zaply-recorder`, tag `latest`; Network: Host Network;
-Storage: a host path mounted at `/data`, another at `/library`. Install. To
-update, the app's Update button.
+Storage: an **ixVolume** (the dataset TrueNAS creates by itself) mounted at
+`/data` for its settings, and a **Host Path** to the recordings' dataset
+mounted at `/library`. Install. To update, the app's Update button. Deleting
+the app with "Remove ixVolumes" ticked deletes its settings; the recordings
+stay.
 
 ## Set it up
 
