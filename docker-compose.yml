@@ -1,0 +1,13 @@
+# Zaply Recorder on a NAS or any Docker host: docker compose up -d
+#
+# Host networking lets the Zaply apps find it by themselves. Without it,
+# publish ports 9393 (its page and the apps) and 9394 (HTTPS, for a port
+# forwarded from the internet), and type its address in Zaply.
+services:
+  zaply-recorder:
+    image: ghcr.io/goodfolks-app/zaply-recorder:latest
+    network_mode: host
+    volumes:
+      - /path/to/zaply/data:/data       # its settings and list of recordings
+      - /path/to/zaply/library:/library # what it records and downloads
+    restart: unless-stopped

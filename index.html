@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zaply Recorder: record TV at home for Zaply</title>
+<meta name="description" content="Zaply Recorder records live TV and downloads films and series for Zaply on iPhone, iPad and Apple TV, from a Mac, a Windows PC, a Linux box or a NAS at home.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zaply">
+<meta property="og:title" content="Zaply Recorder">
+<meta property="og:description" content="Record live TV and download films and series for Zaply, on a computer at home.">
+<meta property="og:url" content="https://goodfolks-app.github.io/zaply-recorder/">
+<meta property="og:image" content="https://goodfolks.fr/zaply/og/en.png">
+<meta name="theme-color" content="#08090e">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="https://goodfolks.fr/zaply/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="https://goodfolks.fr/zaply/apple-touch-icon.png">
+<style>
+:root {
+  color-scheme: dark;
+  --ground: #08090e;
+  --surface: #141924;
+  --surface-2: #1b2130;
+  --panel: #10131b;
+  --ink: #f5f5f7;
+  --ink-2: #f5f5f7a3;
+  --ink-3: #f5f5f794;
+  --hairline: #f5f5f71a;
+  --hairline-2: #f5f5f72e;
+  --brand: #f84617;
+  --brand-hover: #ff5a2e;
+  --brand-ink: #0a0b10;
+  --green: #30d158;
+  --radius: 12px;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro", "Inter", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --fs-display: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem);
+  --fs-h2: clamp(1.75rem, 1.3rem + 1.6vw, 2.75rem);
+  --fs-lede: clamp(1.125rem, 1.02rem + .45vw, 1.375rem);
+  --fs-body: 1.0625rem;
+  --fs-small: .9375rem;
+  --fs-caption: .8125rem;
+  --content: 1120px;
+  --gutter: clamp(16px, 5vw, 48px);
+  --section: clamp(72px, 10vw, 136px);
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+}
+* { box-sizing: border-box; }
+html { background: var(--ground); color: var(--ink); font-family: var(--font); -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--ground); font-size: var(--fs-body); line-height: 1.55; }
+a { color: inherit; }
+p { margin: 0; }
+h1, h2, h3 { margin: 0; letter-spacing: -.02em; line-height: 1.1; }
+code, pre { font-family: var(--mono); }
+.wrap { width: 100%; max-width: var(--content); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* Header */
+.site-header { position: sticky; top: 0; z-index: 10; background: #08090ecc; backdrop-filter: saturate(1.6) blur(16px); -webkit-backdrop-filter: saturate(1.6) blur(16px); border-bottom: 1px solid var(--hairline); }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+.site-header nav { display: flex; gap: 20px; font-size: var(--fs-small); color: var(--ink-2); }
+.site-header nav a { text-decoration: none; }
+.site-header nav a:hover { color: var(--ink); }
+
+/* Hero */
+.hero { padding: var(--section) 0 calc(var(--section) * .6); text-align: center; }
+.mark { width: 72px; height: 72px; margin: 0 auto 28px; border-radius: 20px; background: var(--brand); display: grid; place-items: center; }
+.eyebrow { color: var(--brand); font-weight: 600; font-size: var(--fs-small); letter-spacing: .02em; margin-bottom: 14px; }
+.hero h1 { font-size: var(--fs-display); }
+.lede { font-size: var(--fs-lede); color: var(--ink-2); max-width: 640px; margin: 20px auto 0; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 36px; }
+.meta { margin-top: 18px; color: var(--ink-3); font-size: var(--fs-caption); }
+
+.btn { min-height: 48px; border-radius: var(--radius); font-weight: 600; font-size: var(--fs-body); cursor: pointer; border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 22px; line-height: 1; text-decoration: none; transition: background-color .18s var(--ease-out), border-color .18s var(--ease-out); }
+.btn-primary { background: var(--brand); color: var(--brand-ink); }
+.btn-primary:hover { background: var(--brand-hover); }
+.btn-quiet { color: var(--ink); border-color: var(--hairline-2); background: none; }
+.btn-quiet:hover { border-color: var(--ink-3); }
+.btn-small { min-height: 40px; font-size: var(--fs-small); padding: 0 16px; }
+
+/* Sections */
+section { padding: calc(var(--section) * .5) 0; }
+.section-head { max-width: 720px; margin-bottom: 36px; }
+.section-head h2 { font-size: var(--fs-h2); }
+.section-head p { color: var(--ink-2); margin-top: 14px; font-size: var(--fs-lede); }
+
+/* Downloads */
+.downloads { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--hairline); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.card.is-yours { border-color: var(--brand); }
+.card h3 { font-size: 1.375rem; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.yours { display: none; font-size: var(--fs-caption); font-weight: 600; color: var(--brand); letter-spacing: 0; }
+.card.is-yours .yours { display: inline; }
+.card .req { color: var(--ink-3); font-size: var(--fs-small); }
+.card .body { color: var(--ink-2); font-size: var(--fs-small); flex: 1; }
+.card .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.card .actions .btn { flex: 1 1 auto; }
+.command { display: flex; align-items: stretch; background: var(--panel); border: 1px solid var(--hairline); border-radius: 10px; overflow: hidden; }
+.command code { flex: 1; min-width: 0; padding: 12px; font-size: .78rem; line-height: 1.5; white-space: pre-wrap; word-break: break-all; color: var(--ink); }
+.copy { flex: none; border: 0; border-left: 1px solid var(--hairline); background: none; color: var(--ink-2); font: 600 var(--fs-caption) var(--font); padding: 0 14px; cursor: pointer; }
+.copy:hover { color: var(--ink); background: var(--surface-2); }
+.copy.done { color: var(--green); }
+.links { font-size: var(--fs-caption); color: var(--ink-3); }
+.links a { color: var(--ink-2); }
+.note { font-size: var(--fs-caption); color: var(--ink-3); }
+
+/* Features */
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 28px 32px; }
+.feature h3 { font-size: 1.125rem; letter-spacing: -.01em; margin-bottom: 6px; }
+.feature p { color: var(--ink-2); font-size: var(--fs-small); }
+.feature .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); margin-bottom: 14px; }
+
+/* Steps */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; counter-reset: step; }
+.steps li { counter-increment: step; background: var(--surface); border: 1px solid var(--hairline); border-radius: 18px; padding: 24px; color: var(--ink-2); font-size: var(--fs-small); }
+.steps li::before { content: counter(step); display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--surface-2); color: var(--ink); font-weight: 700; margin-bottom: 14px; }
+.steps strong { color: var(--ink); font-weight: 600; }
+.steps code, .away code { font-size: .85em; background: var(--panel); border: 1px solid var(--hairline); border-radius: 6px; padding: 1px 6px; color: var(--ink); word-break: break-all; }
+
+.away { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 16px; }
+.away .card p { color: var(--ink-2); font-size: var(--fs-small); }
+
+/* Footer */
+footer { border-top: 1px solid var(--hairline); margin-top: calc(var(--section) * .5); padding: 40px 0 56px; color: var(--ink-3); font-size: var(--fs-caption); }
+footer .top { display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+footer nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+footer nav a { color: var(--ink-2); text-decoration: none; }
+footer nav a:hover { color: var(--ink); }
+footer p + p { margin-top: 8px; }
+
+@media (max-width: 560px) {
+  .site-header nav a.optional { display: none; }
+  .cta .btn { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="./">
+      <svg width="22" height="22" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="#f84617" d="M488 64h48v189a237 237 0 0 0 237 237h189v48H773a237 237 0 0 0-237 237v189h-48V775a237 237 0 0 0-237-237H62v-48h189a237 237 0 0 0 237-237V64z"/></svg>
+      Zaply Recorder
+    </a>
+    <nav aria-label="Page">
+      <a href="#download">Download</a>
+      <a class="optional" href="#setup">Set up</a>
+      <a href="https://goodfolks.fr/zaply">Zaply</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <div class="mark" aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 1024 1024"><path fill="#0a0b10" d="M488 64h48v189a237 237 0 0 0 237 237h189v48H773a237 237 0 0 0-237 237v189h-48V775a237 237 0 0 0-237-237H62v-48h189a237 237 0 0 0 237-237V64z"/></svg>
+      </div>
+      <p class="eyebrow">For Zaply on iPhone, iPad and Apple TV</p>
+      <h1>Zaply Recorder</h1>
+      <p class="lede">Records live TV and downloads films and series on a computer that stays on at home. Zaply schedules, watches and fetches from it, with your phone in your pocket.</p>
+      <div class="cta">
+        <a class="btn btn-primary" id="primary" href="#download">Download</a>
+        <a class="btn btn-quiet" href="#setup">How to set it up</a>
+      </div>
+      <p class="meta">Version 1.0.0 · Free · macOS, Windows, Linux and Docker</p>
+    </div>
+  </div>
+
+  <section id="download">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Download</h2>
+        <p>Install it on a computer that stays on: a Mac, a Windows PC, a Linux box or a NAS. One recorder serves the whole household.</p>
+      </div>
+      <div class="downloads">
+        <article class="card" data-os="mac">
+          <h3>macOS <span class="yours">This computer</span></h3>
+          <p class="req">macOS 14 or later · Apple silicon and Intel</p>
+          <p class="body">Open the disk image and drag Zaply Recorder to Applications. It lives in the menu bar, and its settings can open it at login.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://github.com/goodfolks-app/zaply-recorder/releases/latest/download/Zaply-Recorder.dmg">Download for Mac</a>
+          </div>
+        </article>
+
+        <article class="card" data-os="windows">
+          <h3>Windows <span class="yours">This computer</span></h3>
+          <p class="req">Windows 10 and 11 · x64</p>
+          <p class="body">Run the installer: Zaply Recorder lives in the tray and starts with Windows. The portable zip runs from any folder.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://github.com/goodfolks-app/zaply-recorder/releases/latest/download/Zaply-Recorder-windows-x64.exe">Installer</a>
+            <a class="btn btn-quiet" href="https://github.com/goodfolks-app/zaply-recorder/releases/latest/download/Zaply-Recorder-windows-x64-portable.zip">Portable zip</a>
+          </div>
+          <p class="note">The app isn't signed yet, so Windows may warn the first time: More info ▸ Run anyway.</p>
+        </article>
+
+        <article class="card" data-os="linux">
+          <h3>Linux <span class="yours">This computer</span></h3>
+          <p class="req">systemd · amd64, arm64, armv7</p>
+          <p class="body">Installs it as a service, and ffmpeg from your system's packages. Run it again to update.</p>
+          <div class="command">
+            <code id="linux-command">curl -fsSL https://goodfolks-app.github.io/zaply-recorder/install.sh | sudo sh</code>
+            <button class="copy" type="button" data-copy="linux-command">Copy</button>
+          </div>
+          <p class="links">Or the archive:
+            <a href="https://github.com/goodfolks-app/zaply-recorder/releases/latest/download/zaply-recorder-linux-amd64.tar.gz">amd64</a> ·
+            <a href="https://github.com/goodfolks-app/zaply-recorder/releases/latest/download/zaply-recorder-linux-arm64.tar.gz">arm64</a> ·
+            <a href="https://github.com/goodfolks-app/zaply-recorder/releases/latest/download/zaply-recorder-linux-armv7.tar.gz">armv7</a>,
+            then <code>sudo ./install.sh</code></p>
+        </article>
+
+        <article class="card" data-os="docker">
+          <h3>Docker and NAS</h3>
+          <p class="req">TrueNAS, Synology, Unraid · amd64 and arm64</p>
+          <p class="body">Host networking lets Zaply find it by itself. Mount a folder at <code>/data</code> for its settings and one at <code>/library</code> for recordings.</p>
+          <div class="command">
+            <code id="docker-image">ghcr.io/goodfolks-app/zaply-recorder:latest</code>
+            <button class="copy" type="button" data-copy="docker-image">Copy</button>
+          </div>
+          <p class="links"><a href="https://github.com/goodfolks-app/zaply-recorder#docker-and-nas">TrueNAS steps and docker-compose.yml</a></p>
+        </article>
+      </div>
+      <p class="links" style="margin-top: 20px">
+        <a href="https://github.com/goodfolks-app/zaply-recorder/releases/latest">All releases and checksums</a> ·
+        <a href="https://github.com/goodfolks-app/zaply-recorder">GitHub</a>
+      </p>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Why a recorder?</h2>
+        <p>iPhones and Apple TVs can't record in the background: the system suspends the app. Zaply Recorder does it at home instead, so a match or a whole series is recorded while your devices sleep.</p>
+      </div>
+      <div class="features">
+        <div class="feature"><div class="dot"></div><h3>Record anything</h3><p>A channel now, a programme from the TV guide, every airing of a show, or a match.</p></div>
+        <div class="feature"><div class="dot"></div><h3>Download films and series</h3><p>To your library at home, as the provider's own file, with every audio and subtitle track.</p></div>
+        <div class="feature"><div class="dot"></div><h3>Watch while it records</h3><p>From any Zaply device, at the start or at the live edge.</p></div>
+        <div class="feature"><div class="dot"></div><h3>Respects your line</h3><p>Never more connections than your provider allows. When the line is busy, it records the channel's other copy: HD, FHD or 4K.</p></div>
+        <div class="feature"><div class="dot"></div><h3>One file per recording</h3><p>In folders Plex, Jellyfin and Emby read as they are.</p></div>
+        <div class="feature"><div class="dot"></div><h3>Alerts</h3><p>Zaply tells you when a recording is ready, or when one failed.</p></div>
+        <div class="feature"><div class="dot"></div><h3>Away from home</h3><p>Through Tailscale, or a forwarded HTTPS port with the recorder's own certificate.</p></div>
+        <div class="feature"><div class="dot"></div><h3>Only through a VPN</h3><p>If you want, it records only while the computer's VPN is up.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="setup">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Set it up</h2>
+        <p>A few minutes, once.</p>
+      </div>
+      <ol class="steps">
+        <li><strong>Install it</strong> on the computer that stays on, from the downloads above.</li>
+        <li><strong>Open its page</strong>, <code>http://&lt;the computer&gt;:9393</code>, to set a password and choose where recordings go. The Mac and Windows apps open it from their menu.</li>
+        <li><strong>In Zaply:</strong> Settings ▸ Zaply Recorder ▸ Set up your recorder. Zaply finds it on your network by itself.</li>
+        <li><strong>Record</strong> from a channel, the TV guide or a match, and download a film or an episode with Download to the recorder. They show in Zaply, under Films and Series.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="away">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Away from home</h2>
+      </div>
+      <div class="away">
+        <div class="card">
+          <h3>Tailscale</h3>
+          <p>Recommended. Install Tailscale on the recorder's computer and on your iPhone, then give Zaply the recorder's Tailscale address in Settings ▸ Zaply Recorder ▸ Address away from home. Nothing is exposed to the internet.</p>
+        </div>
+        <div class="card">
+          <h3>Port forwarding</h3>
+          <p>Forward the HTTPS port, <code>9394</code>, on your router (never 9393), and give Zaply <code>https://&lt;your home's address&gt;:9394</code>. Zaply trusts the recorder's own certificate, learnt at home.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <a class="brand" href="https://goodfolks.fr/zaply" aria-label="Zaply">
+        <svg width="22" height="22" viewBox="0 0 1024 1024" aria-hidden="true"><path fill="#f84617" d="M488 64h48v189a237 237 0 0 0 237 237h189v48H773a237 237 0 0 0-237 237v189h-48V775a237 237 0 0 0-237-237H62v-48h189a237 237 0 0 0 237-237V64z"/></svg>
+      </a>
+      <nav aria-label="Footer">
+        <a href="https://goodfolks.fr/zaply/support">Support</a>
+        <a href="https://goodfolks.fr/zaply/privacy">Privacy</a>
+        <a href="https://goodfolks.fr/zaply/terms">Terms</a>
+        <a href="https://discord.gg/JZhBVAD5V6" target="_blank" rel="noopener">Discord</a>
+        <a href="https://github.com/goodfolks-app/zaply-recorder#licences">Licences</a>
+      </nav>
+    </div>
+    <p>Zaply is a media player. It does not provide, host, index or recommend any content. Users are solely responsible for the content they access and for complying with the laws that apply to them.</p>
+    <p>© GOODFOLKS SAS</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var ua = navigator.userAgent;
+  var platform = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+  // An iPad asks for the desktop site and says Macintosh: it has touch.
+  var touch = navigator.maxTouchPoints > 1;
+  var os = null;
+  if (/Win/i.test(platform) || /Windows/i.test(ua)) os = "windows";
+  else if ((/Mac/i.test(platform) || /Macintosh/i.test(ua)) && !touch) os = "mac";
+  else if (/Linux/i.test(platform) && !/Android/i.test(ua)) os = "linux";
+
+  var labels = { mac: "Download for Mac", windows: "Download for Windows", linux: "Install on Linux" };
+  var card = os && document.querySelector('.card[data-os="' + os + '"]');
+  if (card) {
+    card.classList.add("is-yours");
+    var primary = document.getElementById("primary");
+    var direct = card.querySelector("a.btn-primary");
+    primary.textContent = labels[os];
+    primary.href = direct ? direct.href : "#download";
+  }
+
+  document.querySelectorAll(".copy").forEach(function (button) {
+    button.addEventListener("click", function () {
+      var text = document.getElementById(button.dataset.copy).textContent;
+      var done = function () {
+        button.textContent = "Copied";
+        button.classList.add("done");
+        setTimeout(function () { button.textContent = "Copy"; button.classList.remove("done"); }, 1600);
+      };
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(done, function () {});
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
