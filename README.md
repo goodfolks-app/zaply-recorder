@@ -28,7 +28,7 @@ phone in your pocket.
 
 ## Download
 
-Version 1.0.0, from the [latest release](https://github.com/goodfolks-app/zaply-recorder/releases/latest).
+Version 1.0.1, from the [latest release](https://github.com/goodfolks-app/zaply-recorder/releases/latest).
 
 | System | Download |
 |---|---|
@@ -102,6 +102,22 @@ mounted at `/library`. Install. To update, the app's Update button. Deleting
 the app with "Remove ixVolumes" ticked deletes its settings; the recordings
 stay.
 Every field, step by step: [TRUENAS.md](TRUENAS.md).
+
+## Updates
+
+Zaply Recorder looks for a new version twice a day. Its page and the Zaply
+apps say when there is one.
+
+- **Mac** and **Linux** (install.sh): it installs by itself once nothing is
+  recording or downloading. Turn that off in its settings. On a Mac, its menu
+  also installs it right away.
+- **Windows**: choose **Install Zaply Recorder …** in its tray menu. Windows
+  asks for an administrator.
+- **Docker**: pull the new image and recreate the container (TrueNAS: the
+  app's **Update** button).
+
+Your settings and recordings stay. Version 1.0.0 doesn't look for updates:
+install a newer version over it once.
 
 ## Set it up
 
