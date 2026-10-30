@@ -28,7 +28,7 @@ phone in your pocket.
 
 ## Download
 
-Version 1.0.1, from the [latest release](https://github.com/goodfolks-app/zaply-recorder/releases/latest).
+Version 1.0.2, from the [latest release](https://github.com/goodfolks-app/zaply-recorder/releases/latest).
 
 | System | Download |
 |---|---|
