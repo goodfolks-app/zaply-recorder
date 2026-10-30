@@ -98,7 +98,8 @@ share). Then Apps ▸ Discover Apps ▸ Custom App: image repository
 `ghcr.io/goodfolks-app/zaply-recorder`, tag `latest`; Network: Host Network;
 Storage: an **ixVolume** (the dataset TrueNAS creates by itself) mounted at
 `/data` for its settings, and a **Host Path** to the recordings' dataset
-mounted at `/library`. Install. To update, the app's Update button. Deleting
+mounted at `/library`. Install. To update, Edit ▸ Pull Policy **Always pull**
+▸ Save, then set the policy back (see [TRUENAS.md](TRUENAS.md#6-update)). Deleting
 the app with "Remove ixVolumes" ticked deletes its settings; the recordings
 stay.
 Every field, step by step: [TRUENAS.md](TRUENAS.md).
@@ -113,8 +114,10 @@ apps say when there is one.
   also installs it right away.
 - **Windows**: choose **Install Zaply Recorder …** in its tray menu. Windows
   asks for an administrator.
-- **Docker**: pull the new image and recreate the container (TrueNAS: the
-  app's **Update** button).
+- **Docker**: pull the new image and recreate the container. On TrueNAS:
+  Edit ▸ Pull Policy **Always pull** ▸ Save, then the policy back to its
+  default; its own "Update available" is late or missing for `latest`
+  ([TRUENAS.md](TRUENAS.md#6-update)).
 
 Your settings and recordings stay. Version 1.0.0 doesn't look for updates:
 install a newer version over it once.

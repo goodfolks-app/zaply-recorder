@@ -126,14 +126,23 @@ elsewhere, choose one way:
 
 ## 6. Update
 
-TrueNAS checks for a new version by itself, every now and then. When **Apps ▸
-Installed** shows **Update available** for zaply-recorder, select it and click
-**Update**.
+Zaply Recorder looks for a new version twice a day. When there is one, its
+page (`http://<the NAS's address>:9393`) and Zaply's **Settings ▸ Zaply
+Recorder** say so. Version 1.0.0 doesn't look: if yours says 1.0.0, update it
+once as below.
 
-To update right away instead: select zaply-recorder, click **Edit**, set
-**Pull Policy** (Image Configuration) to **Always pull**, and **Save**.
-TrueNAS starts it again with the newest version. Then set the Pull Policy back
-to its default, so the app also starts when the NAS has no internet.
+To update:
+
+1. **Apps ▸ Installed**: select zaply-recorder and click **Edit**.
+2. In Image Configuration, set **Pull Policy** to **Always pull** and click
+   **Save**. TrueNAS downloads the new version and starts the app again with
+   it.
+3. Once it is running, click **Edit** again, set the Pull Policy back to its
+   default, and **Save**, so the app also starts when the NAS has no internet.
+
+Don't wait for TrueNAS to show **Update available**: for an app that follows
+`latest`, it shows late, or not at all. When it does show, its **Update**
+button works too.
 
 Either way, the settings and recordings stay, and a recording in progress
 resumes in the same file.
